@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block body_contents %}
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('friends') }}">Friends</a></li>
+            <li role="presentation"><a href="{{ url_for('myProfile') }}">Profile</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+
+        </nav>
+        <h3 class="text-muted"><a href="{{ url_for('index') }}" class="text-muted">UNSWtalk</a></h3>
+        
+        <br>
+        <form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
+          <div class="input-group">
+              <input name="searchtext" value="" class="form-control" type="text">
+              <span class="input-group-btn">
+               <button class="btn btn-default" type="submit" id="addressSearch">
+                   <span class="glyphicon glyphicon-search"></span>
+               </button>
+              </span>
+          </div>
+        </form>
+      </div>
+
+
+<h2>Welcome back, {{profName}}</h2>
+
+{% set latestPID = pcr|length-1 %}
+
+<div class="commentInterface">
+    <form action="{{ url_for('writePost', maxPostID=latestPID) }}" method="POST">
+        <textarea class="form-control" rows="3" name="post" placeholder="What's on your mind..."></textarea>
+  <button class="superButton btn btn-success">Add</button>
+    </form>
+</div>
+
+
+{% for key in range(pcr|length-1, -1, -1) %}
+{% for item in pcr[key|string] %}
+    {% set x = item['postID'].split('-') %}
+    {% set postOwner = item['from'].strip() %}
+    {% set ownersName = complete[postOwner]['full_name'] %}
+    {% set postDate = item['time'][:-2] %}
+
+    {% if x|length == 1 %}
+        <div class="posts">
+        <img class="postsImage" src="{{imgHash[postOwner]}}">
+            <div class="postDetails">
+            <a href="{{ url_for('showProfile', friendsZID=postOwner) }}">
+                {{ownersName}}
+            </a>   
+            </div>
+            <br>
+            {{item['message']}}
+            {% if postOwner == session.get('zID') %}
+                <a href="{{ url_for('deletePost', postID=item['postID']) }}" class="btn btn-primary btn-link btn-xs">Delete</a>
+            {% endif %}
+            <div class="text-muted">
+            {# {{item['postID']}} #}
+            {{postDate}}
+            </div>
+        </div>
+
+    {% elif x|length == 2 %}
+        <div class="comments">
+        <img class="postsImage" src="{{imgHash[postOwner]}}">
+            <div class="postDetails">
+            <a href="{{ url_for('showProfile', friendsZID=postOwner) }}">
+                {{ownersName}}
+            </a>   
+            </div>
+            <br>
+            {{item['message']}}
+            <div class="text-muted">
+            {# {{item['postID']}} #}
+            {{postDate}}
+            </div>
+        </div>
+    
+    {% else %}
+        <div class="replies">
+        <img class="postsImage" src="{{imgHash[postOwner]}}">
+            <div class="postDetails">
+            <a href="{{ url_for('showProfile', friendsZID=postOwner) }}">
+                {{ownersName}}
+            </a>   
+            </div>
+            <br>
+            {{item['message']}}
+            <div class="text-muted">
+            {# {{item['postID']}} #}
+            {{postDate}}
+            </div>
+        </div>
+
+    {% endif %}
+
+    {# {{item}} #}
+    <br>
+{% endfor %}
+{% endfor%}
+
+
+<form method="POST" action="{{ url_for('logout') }}">
+    <input type="submit" value="Logout" class="unswtalk_button">
+</form>
+
+
+
+{% endblock %}

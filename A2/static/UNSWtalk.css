@@ -1,0 +1,102 @@
+/*
+ * written by andrewt@cse.unsw.edu.au October 2017
+ * as a starting point for COMP[29]041 assignment 2
+ * https://cgi.cse.unsw.edu.au/~cs2041/assignments/UNSWtalk/
+ *
+ * Change (or replace) the CSS below to create you own look-and-feel
+ *
+ * You will probably want to add  CSS to this file too
+ */
+
+.unswtalk_heading {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    text-align: center;
+    font-size: x-large;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.unswtalk_user_details {
+    background-color: #ABCDEF;
+    color: #204142;
+    white-space: pre;
+    border:thin solid #204142;
+    border-radius: 1em;
+    padding-left: 0.42em;
+}
+
+.unswtalk_button {
+    border: 1px solid black;
+    position: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #FEDBCA;
+    border:thin solid #904142;
+    border-radius: 0.42em;
+    color: #904142;
+}
+
+.friendsImage{
+    width: 17%;
+    height: 17%;
+}
+
+.regHeading h4{
+    text-align:  left;
+    align-items: left;
+    float: left;
+}
+
+/*.friendsList{
+    border:1px solid black;
+    margin-top: 10px;
+}*/
+
+#friend{
+    /*border:1px solid black;*/
+    width: 50%;
+    display:flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+
+.friendName{
+    padding-left:10px;
+}
+
+.postsImage{
+    width: 7%;
+    height: 7%;
+}
+
+
+.comments{
+    padding-left:20px;
+    /*border-style: solid;*/
+    margin-left:25px;
+    border-left: thick double #ced7e5;
+}
+
+.replies{
+    padding-left: 80px;
+}
+
+.postDetails{
+    font-weight: bold;
+    display: inline;
+}
+
+.commentInterface{
+    display: right;
+    text-align: right;
+}
+
+.superButton{
+    margin-top: 5px;
+}
+
+
+img.pic{
+  width:30%;              /* to determine the size of the image */
+}

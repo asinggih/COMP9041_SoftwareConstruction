@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block body_contents %}
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="{{ url_for('home') }}">Home</a></li>
+            <li role="presentation" class="active"><a href="#">Friends</a></li>
+            <li role="presentation"><a href="{{ url_for('myProfile') }}">Profile</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted"><a href="{{ url_for('index') }}" class="text-muted">UNSWtalk</a></h3>
+      
+
+        <br>
+        <form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
+          <div class="input-group">
+              <input name="searchtext" value="" class="form-control" type="text">
+              <span class="input-group-btn">
+               <button class="btn btn-default" type="submit" id="addressSearch">
+                   <span class="glyphicon glyphicon-search"></span>
+               </button>
+              </span>
+          </div>
+        </form>
+
+      </div>
+
+
+<h2>{{profName}}'s friends</h2>
+<br>
+
+<form action="" method="GET"> 
+  <div class="row">
+    <div class="col-xs-6 col-md-4">
+      <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search {{profName}}'s friend" id="txtSearch"/>
+            <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit">
+        <span class="glyphicon glyphicon-search"></span>
+        </button>
+   </div>
+   </div>
+    </div>
+  </div>
+</form>
+
+
+
+{# --------------------------------------------- #}
+
+{#     NEED TO PUT A CSS TO LIST THEM NICELY!! #}
+
+{# --------------------------------------------- #}
+
+<div class="friendsList">
+{% for student,imgPath in imgHash.items() if student != zID%}
+  {% if student in listOfFriends %}
+    <br>
+    <div id="friend">
+      {% set zID=friendsInfo[student]['zid'].strip() %}
+    
+      <img class="friendsImage" src="{{ imgPath }}"></img>
+      <a href="{{ url_for('showProfile', friendsZID=zID) }}">
+        <h4 class="friendName"> {{ friendsInfo[student]['full_name'] }} </h4>
+      </a>
+    </div>
+  {% endif %}
+{% endfor %}
+</div>
+
+<form method="POST" action="{{ url_for('logout') }}">
+    <input type="hidden" name="n" value="1">
+    <input type="submit" value="Logout" class="unswtalk_button">
+</form>
+
+
+
+{% endblock %}

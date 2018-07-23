@@ -1,0 +1,97 @@
+
+
+Question 1
+	egrep 'lmn' words.txt
+
+Question 2
+Write a shell pipeline that prints the words that contain "zz", but do not end in apostrophe-s ('s)?
+
+	egrep 'zz' words.txt | egrep -v "'s"
+	we cheated by using grepping it twice. first we grep everything that contains zz,
+	and from that result, we take everything that doesn't contain 's
+
+Question 3
+Write an egrep command that prints the words that contain four consecutive vowels?
+
+	egrep '[aiueo]{4,}' -i words.txt
+	-i is to ignore case
+
+Question 4
+Write an egrep command that prints words which contain all 5 vowels "aeiou" in that order?
+The words may contain more than 5 vowels but they must contain "aeiou" in that order.
+
+	egrep 'a.*e.*i.*o.*u.*' words.txt
+
+Question 5
+Write an egrep command that prints which contain the vowels "aeiou" in that order and no other vowels.
+
+	egrep '^[^aeiou]*a[^aeiou]*e[^aeiou]*i[^aeiou]*o[^aeiou]*u[^aeiou]*$' words.txt
+
+
+Question 6
+	Write an egrep command that will print all the lines in the file where the electorate begins with W.
+
+	egrep 'Member for W' parliament.txt
+
+
+Question 7
+	Write an egrep command that will list all the lines in the file where the MP's first name is Andrew.
+
+	egrep "Andrew\b" parliament.txt
+
+	the \b is the word boundary
+
+Question 8
+	Write an egrep command that will print all the lines in the file where the MP's surname (last name) ends in the letter 'y'.
+
+	egrep "y:" parliament.txt
+
+Question 9
+	Write an egrep command that will print all the lines in the file where the MP's name and the electorate ends in the letter 'y'.
+
+	egrep "y:" parliament.txt | egrep "y,"
+	egrep "y: *Member for [A-Za-z]*y," parliament.txt
+
+Question 10
+	Write an egrep command that will print all the lines in the file where the MP's name or the electorate ends in the letter 'y'
+
+	egrep "(y:|y,)" parliament.txt
+
+	the vertical bar represents alternation (can be x | or can be y)
+
+Question 11
+	Write an egrep command to print all the lines in the file where there is any part of the MP's name or the electorate name that ends in ng.
+
+	egrep "(ng:|ng,)" parliament.txt
+
+
+Question 12
+	Write an egrep command that will print all the lines in the file where the MP's surname (last name) both begins and ends with a vowel.
+
+	egrep "([AEIOU][^ ]*[aeiou]:)" parliament.txt
+
+
+Question 13
+	Most electorate have names that are a single word, e.g. Warringah, Lyons & Grayndler. A few electorates have multiple word names, for example, Kingsford Smith. Write an egrep command that will print all the lines in the file where the electorate name contains multiple words (separated by spaces or hyphens).
+
+
+	egrep "Member for \w+(\s{1}|-)\w+" parliament.txt
+
+	Im grepping the pattern "Member for *word *spaceOrDash *word"
+
+
+Question 14
+	Write a shell pipeline which prints the 8 Australians states & territory in order of the number of MPs they have. It should print only the names of the states/territories. It should print them one per line
+
+	egrep ', .*' -o parliament.txt | cut -d' ' -f2- |sort -n | uniq -c | sort -n | egrep "[^0-9]+" -o
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body_contents %}
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="/">Home</a></li>
+            <li role="presentation" class="active"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="#">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">UNSWtalk</h3>
+      </div>
+
+
+<div class="unswtalk_student_details">
+
+
+{# print the details of the users #}
+
+{% for k,v in stuInfo.items() %}
+	{{k+":"}}  {{v}} <br>
+{% endfor %}
+
+</div>
+
+<form method="POST" action="">
+    <input type="hidden" name="n" value="1">
+    <input type="submit" value="Next student" class="unswtalk_button">
+</form>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block body_contents %}
+
+    <div class="container">
+      <div class="header">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation"><a href="{{ url_for('home') }}">Home</a></li>
+            <li role="presentation"><a href="{{ url_for('friends') }}">Friends</a></li>
+            <li role="presentation" class="active"><a href="#">Profile</a></li>
+            <li role="presentation"><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted"><a href="{{ url_for('index') }}" class="text-muted">UNSWtalk</a></h3>
+        
+        <br>
+        <form action="" autocomplete="off" class="form-horizontal" method="post" accept-charset="utf-8">
+          <div class="input-group">
+              <input name="searchtext" value="" class="form-control" type="text">
+              <span class="input-group-btn">
+               <button class="btn btn-default" type="submit" id="addressSearch">
+                   <span class="glyphicon glyphicon-search"></span>
+               </button>
+              </span>
+          </div>
+        </form>
+      </div>
+
+<h2>{{profName}}</h2>
+<img src="{{ profImg }}">
+<br>
+
+
+<div class="unswtalk_student_details">
+
+
+{# print the details of the users #}
+
+{% for k,v in stuInfo.items() %}
+	{{k+":"}}  {{v}} <br>
+{% endfor %}
+
+</div>
+
+
+<form method="POST" action="{{ url_for('logout') }}">
+    <input type="hidden" name="n" value="1">
+    <input type="submit" value="Logout" class="unswtalk_button">
+</form>
+
+
+
+{% endblock %}
