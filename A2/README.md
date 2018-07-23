@@ -38,7 +38,7 @@ Clicking on the image and/or name should take you to that UNSWtalk page.
 
 Your web site should provide searching for a student whose name containing a specified substring. Search results should include the matching name and a thumbnail image. Clicking on the image and/or name should take you to that UNSWtalk page.
 
-###Logging In & Out (Level 1)
+### Logging In & Out (Level 1)
 
 Students should have to login to use UNSWtalk.
 Their password should be checked when they attempt to log in.
