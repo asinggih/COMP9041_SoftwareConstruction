@@ -84,6 +84,7 @@ def home():
             posts = dividePCR(session, 'dataDirectory')
             pcr = hashPCR(posts, session, 'dataDirectory')
 
+
             for posts in pcr.values():
                 for item in posts:
                     postOwner = item['from'].strip()
@@ -92,6 +93,7 @@ def home():
 
             
             complete = getFriends(imgHash, studentList)
+            
 
             session['zID'] = zID
             session['imgInfo'] = imgHash
@@ -112,7 +114,7 @@ def home():
 
         except Exception as e:
             flash("Our server encountered an error")
-            print(str(e))
+
             return redirect(url_for('showSignIn'))
 
     else:
@@ -188,7 +190,6 @@ def friends():
 
 @app.route('/friends/<friendsZID>', methods=['GET', 'POST'])
 def showProfile(friendsZID):
-    print(len(session))
     if 'zID' not in session:
         flash("You need to be logged in to do that")
         return render_template('signin.html')
@@ -340,7 +341,6 @@ def dividePCR(ses, dataDirKey):
     for item in os.listdir(dirPath):
 
         if item not in nope:
-            
             temp = item.split("-")
 
             if len(temp) == 1:
@@ -366,8 +366,7 @@ def dividePCR(ses, dataDirKey):
 
             previousKey = key
 
-
-    posts[str(len(posts)-1)].sort(key=lambda x: [int(y) for y in x.split('-')])
+    posts[sorted(posts.keys())[-1]].sort(key=lambda x: [int(y) for y in x.split('-')])
 
     return posts
 
